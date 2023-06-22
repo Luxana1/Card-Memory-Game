@@ -1,9 +1,6 @@
 // Create an array with the image filenames for the cards
 var cards = ["ciri.png", "geralt.png", "jaskier.png", "jaskier.png", "iorweth.png", "triss.png", "geralt.png", "yen.png", "ciri.png", "triss.png", "yen.png", "iorweth.png"];
 
-// Shuffle the cards randomly
-shuffle(cards);
-
 // Keep track of the number of pairs left to match
 var pairsLeft = cards.length / 2;
 
@@ -13,8 +10,7 @@ var turnCount = 0;
 // Keep track of the IDs of the two currently visible cards
 var visibleCardIds = [];
 
-// Add click handlers to all the cards
-$('.card').click(function() {
+function cardClick() {
     // If two cards are already visible, ignore clicks until they are hidden again
     if (visibleCardIds.length >= 2) {
         return;
@@ -74,7 +70,7 @@ $('.card').click(function() {
             }, 1000);
         }
     }
-});
+}
 
 // Shuffle the elements of an array in place
 function shuffle(array) {
@@ -105,19 +101,31 @@ function resetGame() {
     turnCount = 0;
     pairsLeft = 6;
 
-    // Reset the card elements to their default state
-    $('.cardA').addClass('card');
-    $('.cardA').removeClass('cardA');
-    $('.card').css('background-image', 'url(img/karta.png)');
-
     // Shuffle the cards array
     shuffle(cards);
 
-    // Reset the turn counter text
-    $('.score').html('Turn counter: ' + turnCount);
-
     // Hide the reset button
     $('#reset').hide();
+
+    // Reset board using HTML. This is a bit hacky but it works.
+    $('.board').html(`
+        <div class="card" id="c0"></div>
+        <div class="card" id="c1"></div>
+        <div class="card" id="c2"></div>
+        <div class="card" id="c3"></div>
+        <div class="card" id="c4"></div>
+        <div class="card" id="c5"></div>
+        <div class="card" id="c6"></div>
+        <div class="card" id="c7"></div>
+        <div class="card" id="c8"></div>
+        <div class="card" id="c9"></div>
+        <div class="card" id="c10"></div>
+        <div class="card" id="c11"></div>
+        <div class="score">Turn counter: 0</div>
+    `);
+
+    // Add click handlers to all the cards
+    $('.card').click(cardClick)
 }
 
 

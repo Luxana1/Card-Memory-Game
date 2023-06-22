@@ -20,25 +20,15 @@
 	</header>
 	<main>
 		<article>
-			<div class="board">
-				<div class="card" id="c0"></div>
-				<div class="card" id="c1"></div>
-				<div class="card" id="c2"></div>
-				<div class="card" id="c3"></div>
-				<div class="card" id="c4"></div>
-				<div class="card" id="c5"></div>
-				<div class="card" id="c6"></div>
-				<div class="card" id="c7"></div>
-				<div class="card" id="c8"></div>
-				<div class="card" id="c9"></div>
-				<div class="card" id="c10"></div>
-				<div class="card" id="c11"></div>
-				<div class="score">Turn counter: 0</div>
-			</div>
+			<div class="board"></div>
 			<button type="button" id="reset" onclick="resetGame()">New Game</button>	
 		</article>
 	</main>
 	<script src="jquery-3.6.4.min.js"></script>
 	<script src="memory.js"></script>	
+
+	<!-- reset the game on first load. This allows the logic to be shared for
+	   both first load and subsequent resets -->
+	<script> $(document).ready(resetGame); </script>
 </body>
 </html>
